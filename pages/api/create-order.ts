@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       amount,
       currency: 'INR',
       receipt,
-      payment_capture: 1,
+      payment_capture: true,
     });
     return res.status(200).json({ order });
   } catch (error) {

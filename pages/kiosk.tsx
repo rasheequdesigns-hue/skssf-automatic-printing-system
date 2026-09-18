@@ -49,22 +49,25 @@ export default function Kiosk() {
   // Listen to realtime updates for this session
   useEffect(() => {
     if (!sessionId) return;
+// @ts-ignore
     const channel = supabase
       .channel('public:print_jobs')
       .on(
         'postgres_changes',
         {
           event: 'UPDATE',
+          schema: 'public',
+          table: 'print_jobs',
           filter: `session_id=eq.${sessionId}`,
         },
-        (payload) => {
-          const newStatus = payload.new.payment_status;
-          const jobStatus = payload.new.job_status;
+        (payload: any) => {
+          const newStatus = payload?.new?.payment_status;
+          const jobStatus = payload?.new?.job_status;
           if (newStatus === 'paid') {
             handlePaid(payload.new);
           }
           setJobStatus(jobStatus);
-        }
+        },
       )
       .subscribe();
     return () => {
