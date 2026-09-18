@@ -1,4 +1,4 @@
-﻿export async function postJSON(url: string, data: any) {
+export async function postJSON(url: string, data: any) {
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -6,7 +6,7 @@
   });
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(Request failed:  );
+    throw new Error(`Request failed: ${res.status} ${err}`);
   }
   return res.json();
 }

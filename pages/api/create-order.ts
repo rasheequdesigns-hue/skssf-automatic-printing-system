@@ -1,4 +1,5 @@
-﻿import type { NextApiRequest, NextApiResponse } from 'next';
+// @ts-ignore
+import type { NextApiRequest, NextApiResponse } from 'next';
 import Razorpay from 'razorpay';
 
 const razorpay = new Razorpay({
